@@ -27,7 +27,7 @@ class HTMLNode():
             raise ValueError("No props present for HTML Node")
         html_string = ""
         for key in self.props:
-            html_string += f" {key}={self.props[key]}"
+            html_string += f" {key}=\"{self.props[key]}\""
         return html_string
     
     def __repr__(self):
