@@ -4,8 +4,9 @@ from leafnode import LeafNode
 from parentnode import ParentNode
 
 def main():
-    tn = TextNode("This is dummy text", TextType.LINK, "https://boot.dev")
-    print(tn)
+    # tn = TextNode("This is dummy text", TextType.LINK, "https://boot.dev")
+    # print(tn)
+    pass
 
 
 def text_node_to_html_node(textnode):
