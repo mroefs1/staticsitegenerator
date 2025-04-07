@@ -16,13 +16,23 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
         if node.text_type != TextType.NORMAL:
             new_nodes.append(node) #if the node is not a normal node, no need to split it 
             continue
-        if delimiter == "**": #TextType.BOLD
-            count = node.count(delimiter)
-            split = node.text.split(delimiter)
-            print(f"SPLIT: {split}")
-
-
+        count = node.text.count(delimiter)
+        if count % 2 != 0:
+            raise Exception(f"Invalid Markdown Syntax: Expected closing {delimiter}")
+        split = node.text.split(delimiter)
+        starts_with = node.text.startswith(delimiter) #does the string start with the delim? use to do the ol flipperooni  
+        ends_with = node.text.endswith(delimiter)
+        if starts_with or ends_with: #need to get rid of extra "" element from split() when text starts or ends with delimited section
+            split.remove("")
+        for part in split:
+            if starts_with:
+                new_nodes.append(TextNode(part, text_type))
+            else:
+                new_nodes.append(TextNode(part, TextType.NORMAL))
+            starts_with = not starts_with
     return new_nodes
+
+
 
     
 
